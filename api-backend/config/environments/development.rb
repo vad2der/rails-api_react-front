@@ -16,6 +16,14 @@ Rails.application.configure do
   # Run rails dev:cache to toggle caching.
   if Rails.root.join('tmp', 'caching-dev.txt').exist?
     config.cache_store = :memory_store
+
+    # config.cache_store = :redis_store, {
+    #   expires_in: 1.hour,
+    #   namespace: 'cache',
+    #   redis: { host: 'localhost', port: 6379, db: 0 },
+    #   }
+
+      
     config.public_file_server.headers = {
       'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }
@@ -42,6 +50,7 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
+  # config.active_record.cache_versioning = false
 
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
