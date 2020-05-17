@@ -1,0 +1,35 @@
+version: "3"
+volumes:
+  postgres_data: {}
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+  backend:
+    build:
+      context: ./api-backend
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+    environment:
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+
+  frontend:
+    build:
+      context: ./react-frontend
+      dockerfile: ./Dockerfile
+    ports:
+      - 4000:4000
+    depends_on:
+      - backend
+    stdin_open: true
+    # command: npm start
