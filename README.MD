@@ -24,4 +24,4 @@
 
 ### Both options
 
-3. Goto (localhost:4000)[http://localhost:4000/] in the browser page
+3. Goto [localhost:4000](http://localhost:4000/) in the browser page
